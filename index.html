@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hojun Yang — Mining Robotics & Field Autonomy</title>
+<meta name="description" content="Hojun Yang — M.S. researcher in mining robotics: UAV-based spatial AI, GPS-denied underground navigation, and robot learning for autonomous mining systems." />
+
+<!-- ───────────────────────────────────────────────
+     GOOGLE ANALYTICS (GA4)
+     1. analytics.google.com 에서 GA4 속성 생성
+     2. 아래 G-XXXXXXXXXX 를 본인 측정 ID로 교체
+──────────────────────────────────────────────── -->
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F7F9FC;        /* cool paper */
+  --ink:#0B1B33;          /* deep navy  */
+  --ink-soft:#46586F;
+  --line:#D8E0EA;
+  --laser:#1D4ED8;        /* primary blue */
+  --laser-bright:#38BDF8; /* sky blue signal */
+  --card:#FFFFFF;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --display:'Archivo',sans-serif;
+  --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:16px;
+}
+a{color:var(--laser);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--laser-bright);outline-offset:3px}
+img{max-width:100%;display:block}
+
+/* ── layout ─────────────────────────── */
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+
+/* ── nav ────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,249,252,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  max-width:1060px;margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-name{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;color:var(--ink)}
+.nav-name:hover{text-decoration:none}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap}
+.nav-links a{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;
+  color:var(--ink-soft);text-transform:uppercase;
+}
+.nav-links a:hover{color:var(--laser);text-decoration:none}
+@media(max-width:700px){
+  .nav-links{display:none}
+}
+
+/* ── hero ───────────────────────────── */
+header.hero{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  max-width:1060px;margin:0 auto;padding:84px 24px 76px;
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:48px;align-items:center;
+}
+@media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:40px}}
+/* hero photo collage — drop in profile.jpg / conference.jpg and they auto-blend */
+.hero-photos{position:relative;min-height:340px}
+.frame{
+  position:absolute;border-radius:10px;overflow:hidden;
+  background:#EBF0F6;border:1px dashed #B9C6D6;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:#7E8CA0;text-align:center;padding:10px;
+  box-shadow:0 18px 40px -18px rgba(11,27,51,.35);
+}
+.frame img{width:100%;height:100%;object-fit:cover}
+.frame::after{ /* navy duotone wash so any photo blends with the palette */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(160deg,rgba(29,78,216,.10),rgba(11,27,51,.16));
+  mix-blend-mode:multiply;
+}
+.frame.has-img{border-style:solid;border-color:#FFFFFF;border-width:4px}
+.frame-portrait{
+  width:62%;aspect-ratio:3/4;right:6%;top:0;z-index:2;
+  transform:rotate(2deg);
+}
+.frame-talk{
+  width:58%;aspect-ratio:4/3;left:0;bottom:0;z-index:3;
+  transform:rotate(-2deg);
+}
+.frame-caption{
+  position:absolute;z-index:4;left:2%;bottom:-26px;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);letter-spacing:.03em;
+}
+@media(max-width:840px){
+  .hero-photos{min-height:300px;max-width:420px}
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;
+  color:var(--laser);margin-bottom:22px;
+}
+.hero h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(40px,7vw,72px);
+  line-height:1.02;letter-spacing:-.025em;
+  max-width:13ch;
+}
+.hero h1 .accent{color:var(--laser)}
+.hero-sub{
+  margin-top:26px;max-width:560px;
+  font-size:17px;color:var(--ink-soft);
+}
+.hero-meta{
+  margin-top:36px;display:flex;gap:36px;flex-wrap:wrap;
+}
+.hero-meta div{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+.hero-meta b{display:block;font-family:var(--display);font-weight:800;font-size:26px;color:var(--ink);letter-spacing:-.01em}
+.hero-cta{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:11px 20px;border-radius:4px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.03em;
+  border:1.5px solid var(--ink);color:var(--ink);
+}
+.btn:hover{text-decoration:none;background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--laser);border-color:var(--laser)}
+/* topographic contour signature */
+.contours{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  opacity:.5;
+}
+
+/* ── section headers ────────────────── */
+.sec-head{margin-bottom:40px}
+.sec-eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--laser);margin-bottom:8px;
+}
+.sec-head h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(26px,4vw,36px);
+  letter-spacing:-.02em;
+}
+.sec-head p{color:var(--ink-soft);max-width:620px;margin-top:10px;font-size:15px}
+
+/* ── research cards ─────────────────── */
+.proj{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:32px;align-items:start;
+  background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:28px;margin-bottom:28px;
+}
+@media(max-width:760px){.proj{grid-template-columns:1fr}}
+.proj-media{
+  background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:6px;
+  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;color:#7E8CA0;text-align:center;padding:12px;
+  overflow:hidden;
+}
+.proj-media img,.proj-media iframe{width:100%;height:100%;object-fit:cover;border:0;border-radius:4px}
+.proj-tag{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--laser);
+  margin-bottom:8px;display:block;
+}
+.proj h3{
+  font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.015em;
+  margin-bottom:10px;line-height:1.25;
+}
+.proj p{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+.metrics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.metric{
+  font-family:var(--mono);font-size:11.5px;
+  background:#EAF2FE;color:var(--laser);
+  border:1px solid #C7DCF8;border-radius:3px;padding:3px 8px;
+}
+.proj-links{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}
+.stack{font-family:var(--mono);font-size:11.5px;color:#7E8CA0;margin-top:12px;line-height:1.8}
+
+/* ── publications ───────────────────── */
+.pub{
+  display:grid;grid-template-columns:64px 1fr;gap:20px;
+  padding:22px 0;border-bottom:1px solid var(--line);
+}
+.pub:last-child{border-bottom:none}
+.pub-year{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:3px}
+.pub h3{font-family:var(--body);font-weight:600;font-size:16px;line-height:1.45;margin-bottom:5px}
+.pub .authors{font-size:13.5px;color:var(--ink-soft)}
+.pub .authors .me{color:var(--ink);font-weight:600;border-bottom:2px solid var(--laser-bright)}
+.pub .venue{font-size:13.5px;color:var(--ink-soft);font-style:italic}
+.pub-badges{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
+  padding:2.5px 8px;border-radius:3px;border:1px solid var(--line);color:var(--ink-soft);
+}
+.badge.first{border-color:var(--laser);color:var(--laser);background:#EAF2FE}
+.pub-links{margin-top:8px;display:flex;gap:14px;font-size:13px}
+@media(max-width:560px){.pub{grid-template-columns:1fr;gap:6px}}
+
+/* ── presentations / awards tables ──── */
+.rows{border-top:1px solid var(--line)}
+.row{
+  display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:baseline;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
+.row .when{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+.row .what b{font-weight:600;font-size:15px}
+.row .what span{display:block;font-size:13px;color:var(--ink-soft);margin-top:2px}
+.row .kind{font-family:var(--mono);font-size:11.5px;color:var(--laser);white-space:nowrap}
+.row .kind.gold{color:#A06B00}
+@media(max-width:620px){
+  .row{grid-template-columns:1fr;gap:4px}
+  .row .kind{justify-self:start}
+}
+
+/* ── about / footer ─────────────────── */
+.about-grid{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr}}
+.portrait{
+  aspect-ratio:4/5;background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;color:#7E8CA0;text-align:center;padding:10px;
+  overflow:hidden;
+}
+/* ── awards photo gallery ───────────── */
+.gallery{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;
+}
+@media(max-width:700px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery figure{
+  background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:8px;
+  aspect-ratio:4/3;overflow:hidden;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:#7E8CA0;text-align:center;padding:10px;
+}
+.gallery figure.has-img{border-style:solid;border-color:#fff;border-width:3px;
+  box-shadow:0 12px 28px -14px rgba(11,27,51,.3)}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(transparent,rgba(11,27,51,.82));
+  color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:22px 10px 8px;text-align:left;
+}
+.portrait img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.about-grid p{margin-bottom:14px;color:var(--ink-soft);font-size:15px}
+.interest-list{margin-top:8px}
+.interest-list li{
+  list-style:none;padding:8px 0 8px 22px;position:relative;
+  font-size:14.5px;color:var(--ink);
+}
+.interest-list li::before{
+  content:"";position:absolute;left:0;top:16px;width:10px;height:2px;background:var(--laser-bright);
+}
+footer{
+  border-top:1px solid var(--line);padding:48px 0 64px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);
+}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.contact-line{display:flex;gap:20px;flex-wrap:wrap}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#top">Hojun Yang</a>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Presentations</a>
+      <a href="#awards">Awards</a>
+      <a href="#about">About</a>
+      <a href="cv.pdf">CV ↓</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<header class="hero" id="top">
+  <!-- signature: DEM contour lines -->
+  <svg class="contours" viewBox="0 0 1200 520" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#C3D2E4" stroke-width="1.2">
+      <path d="M700,520 C760,420 880,400 940,310 C1000,220 1100,200 1200,180"/>
+      <path d="M760,520 C820,440 930,420 985,335 C1040,250 1130,235 1200,220"/>
+      <path d="M820,520 C880,460 980,440 1030,360 C1080,280 1160,268 1200,260"/>
+      <path d="M880,520 C935,478 1030,460 1075,388 C1120,316 1180,302 1200,298"/>
+      <path d="M940,520 C990,495 1080,478 1118,415 C1156,352 1195,338 1200,336"/>
+      <path d="M1000,520 C1045,508 1125,492 1158,440 C1191,388 1200,378 1200,374"/>
+    </g>
+    <g fill="none" stroke="#38BDF8" stroke-width="1.4" opacity=".6">
+      <path d="M640,520 C705,400 830,378 895,282 C960,186 1070,165 1200,140"/>
+    </g>
+    <text x="905" y="270" font-family="IBM Plex Mono" font-size="10" fill="#1D4ED8" opacity=".8">+262.5 m</text>
+  </svg>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE · 37.00976°N 128.36047°E</div>
+      <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
+      <p class="hero-sub">
+        I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
+        hazardous mining environments — from UAV-based terrain intelligence to GPS-denied
+        underground navigation and robot-learning-based manipulation. Validated where it
+        counts: inside real mines.
+      </p>
+      <div class="hero-meta">
+        <div><b>1</b>SCI first-author paper<br>(Measurement, 2026)</div>
+        <div><b>6</b>journal articles<br>4 as first author</div>
+        <div><b>5</b>competition awards<br>2 grand prizes</div>
+        <div><b>90%</b>pick &amp; place success<br>robot learning (VLA)</div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn primary" href="#research">Explore research</a>
+        <a class="btn" href="cv.pdf">Download CV (PDF)</a>
+      </div>
+    </div>
+
+    <!-- ── HERO PHOTOS ──
+         아래 두 파일을 index.html과 같은 위치에 업로드하면 자동 적용:
+         1) profile.jpg     (증명사진/프로필, 세로 3:4 권장)
+         2) conference.jpg  (학회 발표 사진, 가로 4:3 권장)
+         업로드 후 각 frame 안의 대괄호 문구를 지우고
+         <img src="profile.jpg" alt="Hojun Yang"> 형태로 교체,
+         그리고 class="frame ..."에 has-img 추가 -->
+    <div class="hero-photos" aria-label="Photos of Hojun Yang">
+      <div class="frame frame-portrait">
+        [ profile.jpg ]
+        <!-- <img src="profile.jpg" alt="Hojun Yang portrait"> -->
+      </div>
+      <div class="frame frame-talk">
+        [ conference.jpg ]
+        <!-- <img src="conference.jpg" alt="Presenting at KSMER conference"> -->
+      </div>
+      <div class="frame-caption">PRESENTING AT KSMER · FIELD RESEARCHER</div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════ RESEARCH ════════ -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Research</div>
+      <h2>From aerial terrain models to underground autonomy</h2>
+      <p>One thread runs through my work: making mining environments measurable, navigable,
+         and workable by machines — so people don't have to take the risk.</p>
+    </div>
+
+    <!-- Project 1: GeoInpainter -->
+    <article class="proj reveal">
+      <div class="proj-media">
+        <!-- GIF 가능! dem-compare.gif 업로드 후 아래 주석 해제 (15MB 이하 권장)
+             <img src="dem-compare.gif" alt="Original vs vehicle-free DEM comparison"> -->
+        [ dem-compare.gif — before/after DEM 비교 GIF ]
+      </div>
+      <div>
+        <span class="proj-tag">UAV SPATIAL AI · 2024–2026 · FLAGSHIP</span>
+        <h3>GeoInpainter — Vehicle-free DEM generation for open-pit mines via UAV image inpainting</h3>
+        <p>Heavy equipment captured in UAV surveys distorts photogrammetric terrain models.
+           I built an automated pipeline — YOLOv8 detection → SAM masking → deep inpainting
+           (LaMa / MAT / DeepFillv2) → SfM reconstruction — that removes equipment before DEM
+           generation, and quantified the 2D-quality vs. 3D-geometry trade-off that
+           inpainting introduces into tie-point matching.</p>
+        <div class="metrics">
+          <span class="metric">MAE 1.276→0.111 m (loader)</span>
+          <span class="metric">~10× faster than manual editing</span>
+          <span class="metric">GUI deployed for field use</span>
+        </div>
+        <div class="proj-links">
+          <a href="#publications">Measurement 2026 (first author)</a>
+          <a href="#awards">Mine-Tech Festa 2025 — Grand Prize</a>
+        </div>
+        <div class="stack">YOLOv8 · SAM · LaMa · SfM · DJI Mini 4 Pro · Pix4D</div>
+      </div>
+    </article>
+
+    <!-- Project 2: Mobile manipulation / robot learning -->
+    <article class="proj reveal">
+      <div class="proj-media">
+        <!-- VIDEO: SmolVLA pick&place 데모 — YouTube unlisted 업로드 후 교체
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Robot learning pick and place demo" allowfullscreen loading="lazy"></iframe> -->
+        [ Video: VLA-based pick &amp; place demo — YouTube embed ]
+      </div>
+      <div>
+        <span class="proj-tag">ROBOT LEARNING · 2025–PRESENT</span>
+        <h3>Mobile manipulation for autonomous mining tasks with vision-language-action models</h3>
+        <p>A mobile manipulator (UGV + 6-DoF collaborative arm, dual RGB-D cameras) trained
+           with imitation learning for autonomous pick-and-place in unstructured settings.
+           By auditing the demonstration dataset with forward-kinematics-based outlier
+           removal, success rate rose to 90% — my current M.S. thesis direction toward
+           perception–decision–manipulation integration in underground mines.</p>
+        <div class="metrics">
+          <span class="metric">90% pick/place success</span>
+          <span class="metric">95-episode curated dataset</span>
+          <span class="metric">6-DoF arm + dual RGB-D</span>
+        </div>
+        <div class="proj-links">
+          <a href="#talks">KSMER 2026 Spring — Poster</a>
+        </div>
+        <div class="stack">SmolVLA · LeRobot · MyCobot Pro 600 · ROS · RealSense D435i/D455</div>
+      </div>
+    </article>
+
+    <!-- Project 3: MeshRover -->
+    <article class="proj reveal">
+      <div class="proj-media">
+        <!-- VIDEO: 단양 지하광산 현장실험 영상 교체
+             <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="MeshRover underground field test" allowfullscreen loading="lazy"></iframe> -->
+        [ Video: 110 m underground teleoperation field test ]
+      </div>
+      <div>
+        <span class="proj-tag">UNDERGROUND ROBOTICS · 2024</span>
+        <h3>MeshRover Connect — Router-drop teleoperation for communication-denied mines</h3>
+        <p>Underground mines lose all connectivity exactly when robots are needed most.
+           Our quadruped autonomously deploys mesh-network router nodes as it advances,
+           extending its own teleoperation range. Demonstrated 110 m of stable remote
+           operation from the portal of an active limestone mine, with 100% router-drop
+           connection success.</p>
+        <div class="metrics">
+          <span class="metric">110 m range underground</span>
+          <span class="metric">100% drop-connect success</span>
+          <span class="metric">15 min deployment</span>
+        </div>
+        <div class="proj-links">
+          <a href="#publications">JKSMER 2025 (co-author)</a>
+          <a href="#awards">Mine-Tech Festa 2024 — Grand Prize</a>
+        </div>
+        <div class="stack">Unitree Go1 · mesh networking · Arduino router-drop module · thermal camera</div>
+      </div>
+    </article>
+
+    <!-- Project 4: rough terrain navigation -->
+    <article class="proj reveal">
+      <div class="proj-media">
+        <!-- FIGURE: 조향별 경로/RMSE 비교 그래프 또는 현장 레이저 그리드 사진
+             <img src="steering-rmse.jpg" alt="Steering mechanism path error comparison"> -->
+        [ Figure: steering-mechanism path error, laser-grid field setup ]
+      </div>
+      <div>
+        <span class="proj-tag">FIELD NAVIGATION · 2024 · WHERE IT STARTED</span>
+        <h3>Wheel slip &amp; path error across steering mechanisms in underground rough terrain</h3>
+        <p>My first research project — and the reason I do field robotics. Compared
+           Ackermann, differential, and tracked steering on wet, potholed mine floors using
+           a laser-grid ground truth, in both field experiments and slip-injected simulation.
+           Differential steering recovered paths best (RMSE 0.2311 m); the gap between
+           simulation and reality taught me to never trust a robot that hasn't left the lab.</p>
+        <div class="metrics">
+          <span class="metric">RMSE 0.231–0.312 m by mechanism</span>
+          <span class="metric">field + simulation validation</span>
+        </div>
+        <div class="proj-links">
+          <a href="#publications">Tunnel &amp; Underground Space 2025 (first author)</a>
+        </div>
+        <div class="stack">AgileX LIMO · ROS · AMCL · DWA · GMapping</div>
+      </div>
+    </article>
+
+    <!-- Project 5: tower crane -->
+    <article class="proj reveal">
+      <div class="proj-media">
+        <!-- FIGURE: 타워크레인 결함 탐지 결과 이미지
+             <img src="crane-detection.jpg" alt="Tower crane defect detection"> -->
+        [ Figure: 3-stage YOLO defect detection on tower crane UAV imagery ]
+      </div>
+      <div>
+        <span class="proj-tag">UAV-AI INSPECTION · 2025 · MOLIT-FUNDED</span>
+        <h3>Drone + AI framework for exterior inspection of high-risk construction machinery</h3>
+        <p>The object-recognition expertise from GeoInpainter, redirected at a new hazard:
+           tower cranes. A three-stage parallel YOLO architecture (ROI selection → part
+           segmentation → defect detection) inspects crane exteriors from UAV imagery,
+           with per-component LLM reporting designed for cost-controlled field deployment.</p>
+        <div class="metrics">
+          <span class="metric">defect mAP 0.937</span>
+          <span class="metric">8-class ROI mAP 0.852</span>
+          <span class="metric">government R&amp;D grant</span>
+        </div>
+        <div class="proj-links">
+          <a href="#publications">Tunnel &amp; Underground Space 2025 (first author)</a>
+        </div>
+        <div class="stack">YOLOv8/11 · CVAT · vision-language models · Jetson</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ════════ PUBLICATIONS ════════ -->
+<section id="publications">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Publications</div>
+      <h2>Journal articles</h2>
+      <p>Underline marks me; first-author papers tagged. Full texts available on request.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="pub">
+        <div class="pub-year">2026</div>
+        <div>
+          <h3>Generation of vehicle-free digital elevation models in open-pit mines using UAV image inpainting</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Yosoon Choi</div>
+          <div class="venue">Measurement (SCIE)</div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span><span class="badge">SCIE</span></div>
+          <div class="pub-links"><a href="#research">Project</a> <a href="#">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2025</div>
+        <div>
+          <h3>Development of drone and AI based framework for exterior inspection and damage classification of tower cranes</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Seungdo Kim, Yosoon Choi</div>
+          <div class="venue">Tunnel and Underground Space, Dec 2025</div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span></div>
+          <div class="pub-links"><a href="#research">Project</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2025</div>
+        <div>
+          <h3>Review of UAV-AI-based automated visual inspection technologies and their applicability to high-risk construction machinery</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Seungdo Kim, Yosoon Choi</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Oct 2025</div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span><span class="badge">REVIEW</span></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2025</div>
+        <div>
+          <h3>Development of augmented reality-based educational content for mine workers</h3>
+          <div class="authors">Mingyeong Jang, <span class="me">Hojun Yang</span>, Yosoon Choi</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Jun 2025</div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2025</div>
+        <div>
+          <h3>Router-drop-based robot teleoperation system for unconnected underground mines</h3>
+          <div class="authors">Sanha Choi, <span class="me">Hojun Yang</span>, Yeanjae Kim, Yosoon Choi</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Jun 2025</div>
+          <div class="pub-links"><a href="#research">Project</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2025</div>
+        <div>
+          <h3>Analysis of wheel slip and path errors based on steering mechanisms of a small autonomous robot in underground rough environments</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Yosoon Choi</div>
+          <div class="venue">Tunnel and Underground Space, Jun 2025</div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span></div>
+          <div class="pub-links"><a href="#research">Project</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PRESENTATIONS ════════ -->
+<section id="talks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Presentations</div>
+      <h2>Conference talks &amp; posters</h2>
+    </div>
+    <div class="rows reveal">
+      <div class="row">
+        <div class="when">2026 SPRING</div>
+        <div class="what"><b>Scaled collaborative-manipulator platform for robot-learning-based autonomous mining equipment</b>
+          <span>KSMER Spring Conference — SmolVLA pick &amp; place system</span></div>
+        <div class="kind">POSTER</div>
+      </div>
+      <div class="row">
+        <div class="when">2026</div>
+        <div class="what"><b>UAV image inpainting for vehicle-free DEM generation</b>
+          <span>SME Annual Conference (USA)</span></div>
+        <div class="kind">POSTER</div>
+      </div>
+      <div class="row">
+        <div class="when">2025 FALL</div>
+        <div class="what"><b>UAV image inpainting for open-pit mine DEM reconstruction</b>
+          <span>KSMER Fall Conference</span></div>
+        <div class="kind">ORAL</div>
+      </div>
+      <div class="row">
+        <div class="when">2025 SPRING</div>
+        <div class="what"><b>Removing heavy equipment from open-pit mine DEMs via deep inpainting</b>
+          <span>KSMER Spring Conference</span></div>
+        <div class="kind">ORAL</div>
+      </div>
+      <div class="row">
+        <div class="when">2024 FALL</div>
+        <div class="what"><b>Wheel slip and path error analysis of steering mechanisms in underground rough terrain</b>
+          <span>KSMER Fall Joint Conference — first conference talk, as an undergraduate</span></div>
+        <div class="kind">ORAL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AWARDS ════════ -->
+<section id="awards">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Awards</div>
+      <h2>Competition record</h2>
+      <p>Mine-Tech Festa is Korea's national mining-technology competition hosted by KOMIR
+         (Korea Mine Rehabilitation &amp; Mineral Resources Corp.).</p>
+    </div>
+    <div class="rows reveal">
+      <div class="row">
+        <div class="when">2025</div>
+        <div class="what"><b>Grand Prize — Mine-Tech Festa</b>
+          <span>GeoInpainter: vehicle-free DEM automation · KOMIR</span></div>
+        <div class="kind gold">★ GRAND PRIZE</div>
+      </div>
+      <div class="row">
+        <div class="when">2024</div>
+        <div class="what"><b>Grand Prize — Mine-Tech Festa</b>
+          <span>MeshRover Connect: router-drop underground teleoperation · KOMIR</span></div>
+        <div class="kind gold">★ GRAND PRIZE</div>
+      </div>
+      <div class="row">
+        <div class="when">2024</div>
+        <div class="what"><b>Excellence Award — Busan Future Scientist Award</b>
+          <span>Busan Metropolitan City</span></div>
+        <div class="kind">EXCELLENCE</div>
+      </div>
+      <div class="row">
+        <div class="when">2023</div>
+        <div class="what"><b>Excellence Award — Geoscience Data Utilization Competition</b>
+          <span>Korea Institute of Geoscience and Mineral Resources</span></div>
+        <div class="kind">EXCELLENCE</div>
+      </div>
+      <div class="row">
+        <div class="when">2023</div>
+        <div class="what"><b>Excellence Award — Mine-Tech Festa</b>
+          <span>ARtist: AR-based safety training content for mine workers · KOMIR</span></div>
+        <div class="kind">EXCELLENCE</div>
+      </div>
+    </div>
+
+    <!-- ── AWARD GALLERY ──
+         시상식/상장 사진을 index.html과 같은 위치에 업로드:
+         award-2025.jpg, award-2024.jpg, award-2023.jpg (파일명 자유, src만 일치시키면 됨)
+         업로드 후 대괄호 문구를 지우고 <img> 주석을 해제, figure에 has-img 추가 -->
+    <div class="gallery reveal">
+      <figure>
+        [ award-2025.jpg ]
+        <!-- <img src="award-2025.jpg" alt="Mine-Tech Festa 2025 Grand Prize ceremony"> -->
+        <figcaption>MINE-TECH FESTA 2025 · GRAND PRIZE</figcaption>
+      </figure>
+      <figure>
+        [ award-2024.jpg ]
+        <!-- <img src="award-2024.jpg" alt="Mine-Tech Festa 2024 Grand Prize ceremony"> -->
+        <figcaption>MINE-TECH FESTA 2024 · GRAND PRIZE</figcaption>
+      </figure>
+      <figure>
+        [ award-2023.jpg ]
+        <!-- <img src="award-2023.jpg" alt="Award ceremony 2023"> -->
+        <figcaption>MINE-TECH FESTA 2023 · EXCELLENCE</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">About</div>
+      <h2>Toward a Ph.D. in field robotics for mining</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="portrait">
+        <!-- PHOTO: 프로필 사진 교체
+             <img src="profile.jpg" alt="Hojun Yang"> -->
+        [ profile photo — profile.jpg ]
+      </div>
+      <div>
+        <p>I'm an M.S. student at the SMART-X Lab, Department of Energy Resources and
+           Geosystems Engineering, Sejong University (advisor: Prof. Yosoon Choi), working
+           on robotics and automation for mining environments. I started as an undergraduate driving small robots through a wet
+           limestone mine, and have since built systems spanning UAV photogrammetry, deep
+           learning-based perception, GPS-denied SLAM, and robot learning for manipulation.</p>
+        <p>I'm preparing to apply for Ph.D. programs (Fall 2027) where I can pursue:</p>
+        <ul class="interest-list">
+          <li>Autonomous exploration and inspection in GPS-denied underground environments</li>
+          <li>Mobile manipulation and robot learning for mining-equipment automation</li>
+          <li>Planetary surface robotics and ISRU — mining beyond Earth</li>
+        </ul>
+        <p style="margin-top:18px">If our research interests overlap, I'd love to talk:
+           <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Hojun Yang · Built by hand, like my robots.</div>
+    <div class="contact-line">
+      <a href="mailto:youremail@example.com">EMAIL</a>
+      <a href="https://scholar.google.com/">SCHOLAR</a>
+      <a href="https://www.researchgate.net/">RESEARCHGATE</a>
+      <a href="https://github.com/">GITHUB</a>
+      <a href="https://www.linkedin.com/">LINKEDIN</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// scroll reveal (reduced-motion safe via CSS)
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
