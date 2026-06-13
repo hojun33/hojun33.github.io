@@ -190,7 +190,8 @@ header.hero{
 .proj-media-videos video{width:100%;height:100%;object-fit:cover;display:block;background:#0B1B33}
 .proj-media-videos figcaption{position:absolute;left:8px;top:8px;background:rgba(11,27,51,.82);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:3px 8px;border-radius:3px;pointer-events:none}
 .proj-media-pair{aspect-ratio:auto;background:none;border:0;padding:0;display:grid;grid-template-rows:1fr 1fr;gap:8px}
-.proj-media-pair figure{position:relative;aspect-ratio:16/10;border:3px solid #fff;border-radius:6px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(11,27,51,.3)}
+.proj-media-pair figure{position:relative;aspect-ratio:16/9;border:3px solid #fff;border-radius:6px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(11,27,51,.3)}
+.proj-media-pair img,.proj-media-pair video{width:100%;height:100%;object-fit:cover;display:block;background:#0B1B33}
 .proj-media-pair figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(11,27,51,.85));color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:16px 8px 6px}
 .proj-tag{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--laser);
@@ -389,11 +390,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <article class="proj reveal">
       <div class="proj-media proj-media-pair">
         <figure>
-          <img src="geoinpainter-dem-with-equipment.gif" alt="DEM accuracy with heavy equipment present (more red = higher error)">
+          <video autoplay muted loop playsinline preload="metadata" poster="geoinpainter-dem-with-equipment-poster.jpg">
+            <source src="geoinpainter-dem-with-equipment.mp4" type="video/mp4"></video>
           <figcaption>WITH EQUIPMENT</figcaption>
         </figure>
         <figure>
-          <img src="geoinpainter-dem-without-equipment.gif" alt="DEM accuracy after equipment removed via inpainting (more green = lower error)">
+          <video autoplay muted loop playsinline preload="metadata" poster="geoinpainter-dem-without-equipment-poster.jpg">
+            <source src="geoinpainter-dem-without-equipment.mp4" type="video/mp4"></video>
           <figcaption>EQUIPMENT REMOVED</figcaption>
         </figure>
       </div>
