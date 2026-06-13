@@ -27,12 +27,12 @@
 
 <style>
 :root{
-  --paper:#F7F7F3;        /* limestone */
-  --ink:#161D1C;          /* mine dark  */
-  --ink-soft:#4A5553;
-  --line:#D9DBD3;
-  --laser:#0E8A5F;        /* survey laser green (deep) */
-  --laser-bright:#17B877; /* survey laser green (signal) */
+  --paper:#F7F9FC;        /* cool paper */
+  --ink:#0B1B33;          /* deep navy  */
+  --ink-soft:#46586F;
+  --line:#D8E0EA;
+  --laser:#1D4ED8;        /* primary blue */
+  --laser-bright:#38BDF8; /* sky blue signal */
   --card:#FFFFFF;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
   --display:'Archivo',sans-serif;
@@ -63,7 +63,7 @@ section{padding:72px 0;border-top:1px solid var(--line)}
 /* ── nav ────────────────────────────── */
 nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(247,247,243,.92);
+  background:rgba(247,249,252,.92);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
@@ -91,6 +91,40 @@ header.hero{
 .hero-inner{
   max-width:1060px;margin:0 auto;padding:84px 24px 76px;
   position:relative;z-index:2;
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:48px;align-items:center;
+}
+@media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:40px}}
+/* hero photo collage — drop in profile.jpg / conference.jpg and they auto-blend */
+.hero-photos{position:relative;min-height:340px}
+.frame{
+  position:absolute;border-radius:10px;overflow:hidden;
+  background:#EBF0F6;border:1px dashed #B9C6D6;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:#7E8CA0;text-align:center;padding:10px;
+  box-shadow:0 18px 40px -18px rgba(11,27,51,.35);
+}
+.frame img{width:100%;height:100%;object-fit:cover}
+.frame::after{ /* navy duotone wash so any photo blends with the palette */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(160deg,rgba(29,78,216,.10),rgba(11,27,51,.16));
+  mix-blend-mode:multiply;
+}
+.frame.has-img{border-style:solid;border-color:#FFFFFF;border-width:4px}
+.frame-portrait{
+  width:62%;aspect-ratio:3/4;right:6%;top:0;z-index:2;
+  transform:rotate(2deg);
+}
+.frame-talk{
+  width:58%;aspect-ratio:4/3;left:0;bottom:0;z-index:3;
+  transform:rotate(-2deg);
+}
+.frame-caption{
+  position:absolute;z-index:4;left:2%;bottom:-26px;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);letter-spacing:.03em;
+}
+@media(max-width:840px){
+  .hero-photos{min-height:300px;max-width:420px}
 }
 .hero-eyebrow{
   font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;
@@ -148,9 +182,9 @@ header.hero{
 }
 @media(max-width:760px){.proj{grid-template-columns:1fr}}
 .proj-media{
-  background:#EDEEE8;border:1px dashed #BFC3B8;border-radius:6px;
+  background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:6px;
   aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:12px;color:#8A8F86;text-align:center;padding:12px;
+  font-family:var(--mono);font-size:12px;color:#7E8CA0;text-align:center;padding:12px;
   overflow:hidden;
 }
 .proj-media img,.proj-media iframe{width:100%;height:100%;object-fit:cover;border:0;border-radius:4px}
@@ -166,11 +200,11 @@ header.hero{
 .metrics{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .metric{
   font-family:var(--mono);font-size:11.5px;
-  background:#EDF5F0;color:var(--laser);
-  border:1px solid #CDE5D8;border-radius:3px;padding:3px 8px;
+  background:#EAF2FE;color:var(--laser);
+  border:1px solid #C7DCF8;border-radius:3px;padding:3px 8px;
 }
 .proj-links{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}
-.stack{font-family:var(--mono);font-size:11.5px;color:#8A8F86;margin-top:12px;line-height:1.8}
+.stack{font-family:var(--mono);font-size:11.5px;color:#7E8CA0;margin-top:12px;line-height:1.8}
 
 /* ── publications ───────────────────── */
 .pub{
@@ -188,7 +222,7 @@ header.hero{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;
   padding:2.5px 8px;border-radius:3px;border:1px solid var(--line);color:var(--ink-soft);
 }
-.badge.first{border-color:var(--laser);color:var(--laser);background:#EDF5F0}
+.badge.first{border-color:var(--laser);color:var(--laser);background:#EAF2FE}
 .pub-links{margin-top:8px;display:flex;gap:14px;font-size:13px}
 @media(max-width:560px){.pub{grid-template-columns:1fr;gap:6px}}
 
@@ -212,10 +246,30 @@ header.hero{
 .about-grid{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
 @media(max-width:700px){.about-grid{grid-template-columns:1fr}}
 .portrait{
-  aspect-ratio:4/5;background:#EDEEE8;border:1px dashed #BFC3B8;border-radius:8px;
+  aspect-ratio:4/5;background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);font-size:12px;color:#8A8F86;text-align:center;padding:10px;
+  font-family:var(--mono);font-size:12px;color:#7E8CA0;text-align:center;padding:10px;
   overflow:hidden;
+}
+/* ── awards photo gallery ───────────── */
+.gallery{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;
+}
+@media(max-width:700px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery figure{
+  background:#EBF0F6;border:1px dashed #B9C6D6;border-radius:8px;
+  aspect-ratio:4/3;overflow:hidden;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:#7E8CA0;text-align:center;padding:10px;
+}
+.gallery figure.has-img{border-style:solid;border-color:#fff;border-width:3px;
+  box-shadow:0 12px 28px -14px rgba(11,27,51,.3)}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(transparent,rgba(11,27,51,.82));
+  color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  padding:22px 10px 8px;text-align:left;
 }
 .portrait img{width:100%;height:100%;object-fit:cover;border-radius:6px}
 .about-grid p{margin-bottom:14px;color:var(--ink-soft);font-size:15px}
@@ -260,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <header class="hero" id="top">
   <!-- signature: DEM contour lines -->
   <svg class="contours" viewBox="0 0 1200 520" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
-    <g fill="none" stroke="#C9CDBF" stroke-width="1.2">
+    <g fill="none" stroke="#C3D2E4" stroke-width="1.2">
       <path d="M700,520 C760,420 880,400 940,310 C1000,220 1100,200 1200,180"/>
       <path d="M760,520 C820,440 930,420 985,335 C1040,250 1130,235 1200,220"/>
       <path d="M820,520 C880,460 980,440 1030,360 C1080,280 1160,268 1200,260"/>
@@ -268,30 +322,51 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <path d="M940,520 C990,495 1080,478 1118,415 C1156,352 1195,338 1200,336"/>
       <path d="M1000,520 C1045,508 1125,492 1158,440 C1191,388 1200,378 1200,374"/>
     </g>
-    <g fill="none" stroke="#17B877" stroke-width="1.4" opacity=".55">
+    <g fill="none" stroke="#38BDF8" stroke-width="1.4" opacity=".6">
       <path d="M640,520 C705,400 830,378 895,282 C960,186 1070,165 1200,140"/>
     </g>
-    <text x="905" y="270" font-family="IBM Plex Mono" font-size="10" fill="#0E8A5F" opacity=".8">+262.5 m</text>
+    <text x="905" y="270" font-family="IBM Plex Mono" font-size="10" fill="#1D4ED8" opacity=".8">+262.5 m</text>
   </svg>
 
   <div class="hero-inner">
-    <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE · 37.00976°N 128.36047°E</div>
-    <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
-    <p class="hero-sub">
-      I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
-      hazardous mining environments — from UAV-based terrain intelligence to GPS-denied
-      underground navigation and robot-learning-based manipulation. Validated where it
-      counts: inside real mines.
-    </p>
-    <div class="hero-meta">
-      <div><b>1</b>SCI first-author paper<br>(Measurement, 2026)</div>
-      <div><b>6</b>journal articles<br>4 as first author</div>
-      <div><b>5</b>competition awards<br>2 grand prizes</div>
-      <div><b>90%</b>pick &amp; place success<br>robot learning (VLA)</div>
+    <div>
+      <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE · 37.00976°N 128.36047°E</div>
+      <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
+      <p class="hero-sub">
+        I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
+        hazardous mining environments — from UAV-based terrain intelligence to GPS-denied
+        underground navigation and robot-learning-based manipulation. Validated where it
+        counts: inside real mines.
+      </p>
+      <div class="hero-meta">
+        <div><b>1</b>SCI first-author paper<br>(Measurement, 2026)</div>
+        <div><b>6</b>journal articles<br>4 as first author</div>
+        <div><b>5</b>competition awards<br>2 grand prizes</div>
+        <div><b>90%</b>pick &amp; place success<br>robot learning (VLA)</div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn primary" href="#research">Explore research</a>
+        <a class="btn" href="cv.pdf">Download CV (PDF)</a>
+      </div>
     </div>
-    <div class="hero-cta">
-      <a class="btn primary" href="#research">Explore research</a>
-      <a class="btn" href="cv.pdf">Download CV (PDF)</a>
+
+    <!-- ── HERO PHOTOS ──
+         아래 두 파일을 index.html과 같은 위치에 업로드하면 자동 적용:
+         1) profile.jpg     (증명사진/프로필, 세로 3:4 권장)
+         2) conference.jpg  (학회 발표 사진, 가로 4:3 권장)
+         업로드 후 각 frame 안의 대괄호 문구를 지우고
+         <img src="profile.jpg" alt="Hojun Yang"> 형태로 교체,
+         그리고 class="frame ..."에 has-img 추가 -->
+    <div class="hero-photos" aria-label="Photos of Hojun Yang">
+      <div class="frame frame-portrait">
+        [ profile.jpg ]
+        <!-- <img src="profile.jpg" alt="Hojun Yang portrait"> -->
+      </div>
+      <div class="frame frame-talk">
+        [ conference.jpg ]
+        <!-- <img src="conference.jpg" alt="Presenting at KSMER conference"> -->
+      </div>
+      <div class="frame-caption">PRESENTING AT KSMER · FIELD RESEARCHER</div>
     </div>
   </div>
 </header>
@@ -309,9 +384,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <!-- Project 1: GeoInpainter -->
     <article class="proj reveal">
       <div class="proj-media">
-        <!-- FIGURE: GeoInpainter before/after DEM 비교 이미지로 교체
-             <img src="assets/geoinpainter-dem.jpg" alt="Vehicle-free DEM comparison"> -->
-        [ Figure: original vs. vehicle-free DEM — assets/geoinpainter-dem.jpg ]
+        <!-- GIF 가능! dem-compare.gif 업로드 후 아래 주석 해제 (15MB 이하 권장)
+             <img src="dem-compare.gif" alt="Original vs vehicle-free DEM comparison"> -->
+        [ dem-compare.gif — before/after DEM 비교 GIF ]
       </div>
       <div>
         <span class="proj-tag">UAV SPATIAL AI · 2024–2026 · FLAGSHIP</span>
@@ -393,7 +468,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <article class="proj reveal">
       <div class="proj-media">
         <!-- FIGURE: 조향별 경로/RMSE 비교 그래프 또는 현장 레이저 그리드 사진
-             <img src="assets/steering-rmse.jpg" alt="Steering mechanism path error comparison"> -->
+             <img src="steering-rmse.jpg" alt="Steering mechanism path error comparison"> -->
         [ Figure: steering-mechanism path error, laser-grid field setup ]
       </div>
       <div>
@@ -419,7 +494,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <article class="proj reveal">
       <div class="proj-media">
         <!-- FIGURE: 타워크레인 결함 탐지 결과 이미지
-             <img src="assets/crane-detection.jpg" alt="Tower crane defect detection"> -->
+             <img src="crane-detection.jpg" alt="Tower crane defect detection"> -->
         [ Figure: 3-stage YOLO defect detection on tower crane UAV imagery ]
       </div>
       <div>
@@ -601,6 +676,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div class="kind">EXCELLENCE</div>
       </div>
     </div>
+
+    <!-- ── AWARD GALLERY ──
+         시상식/상장 사진을 index.html과 같은 위치에 업로드:
+         award-2025.jpg, award-2024.jpg, award-2023.jpg (파일명 자유, src만 일치시키면 됨)
+         업로드 후 대괄호 문구를 지우고 <img> 주석을 해제, figure에 has-img 추가 -->
+    <div class="gallery reveal">
+      <figure>
+        [ award-2025.jpg ]
+        <!-- <img src="award-2025.jpg" alt="Mine-Tech Festa 2025 Grand Prize ceremony"> -->
+        <figcaption>MINE-TECH FESTA 2025 · GRAND PRIZE</figcaption>
+      </figure>
+      <figure>
+        [ award-2024.jpg ]
+        <!-- <img src="award-2024.jpg" alt="Mine-Tech Festa 2024 Grand Prize ceremony"> -->
+        <figcaption>MINE-TECH FESTA 2024 · GRAND PRIZE</figcaption>
+      </figure>
+      <figure>
+        [ award-2023.jpg ]
+        <!-- <img src="award-2023.jpg" alt="Award ceremony 2023"> -->
+        <figcaption>MINE-TECH FESTA 2023 · EXCELLENCE</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -614,8 +711,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="about-grid reveal">
       <div class="portrait">
         <!-- PHOTO: 프로필 사진 교체
-             <img src="assets/profile.jpg" alt="Hojun Yang"> -->
-        [ profile photo — assets/profile.jpg ]
+             <img src="profile.jpg" alt="Hojun Yang"> -->
+        [ profile photo — profile.jpg ]
       </div>
       <div>
         <p>I'm an M.S. student at the SMART-X Lab, Department of Energy Resources and
