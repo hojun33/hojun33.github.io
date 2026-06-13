@@ -332,12 +332,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <g fill="none" stroke="#38BDF8" stroke-width="1.4" opacity=".6">
       <path d="M640,520 C705,400 830,378 895,282 C960,186 1070,165 1200,140"/>
     </g>
-    <text x="905" y="270" font-family="IBM Plex Mono" font-size="10" fill="#1D4ED8" opacity=".8">+262.5 m</text>
   </svg>
 
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE · 37.00976°N 128.36047°E</div>
+      <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE, SOUTH KOREA</div>
       <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
       <p class="hero-sub">
         I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
@@ -347,9 +346,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </p>
       <div class="hero-meta">
         <div><b>1</b>SCI first-author paper<br>(Measurement, 2026)</div>
-        <div><b>6</b>journal articles<br>4 as first author</div>
+        <div><b>7</b>journal papers<br>5 first-author · 1 in press</div>
         <div><b>5</b>competition awards<br>Grand &amp; Gold Prize</div>
-        <div><b>90%</b>pick &amp; place success<br>robot learning (VLA)</div>
+        <div><b>Full-stack</b>ROS · deep learning<br>robot learning · SLAM</div>
       </div>
       <div class="hero-cta">
         <a class="btn primary" href="#research">Explore research</a>
@@ -430,12 +429,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div>
         <span class="proj-tag">ROBOT LEARNING · 2025–PRESENT</span>
-        <h3>Mobile manipulation for autonomous mining tasks with vision-language-action models</h3>
-        <p>A mobile manipulator (UGV + 6-DoF collaborative arm, dual RGB-D cameras) trained
-           with imitation learning for autonomous pick-and-place in unstructured settings.
-           By auditing the demonstration dataset with forward-kinematics-based outlier
-           removal, success rate rose to 90% — my current M.S. thesis direction toward
-           perception–decision–manipulation integration in underground mines.</p>
+        <h3>Vision-language-action robot learning for autonomous manipulation</h3>
+        <p>I trained a 6-DoF collaborative arm (dual RGB-D cameras) with imitation learning
+           to perform autonomous pick-and-place, then audited the demonstration dataset with
+           forward-kinematics-based outlier removal to raise success to 90% — confirming that
+           vision-language-action robot learning transfers to my own hardware. This is the
+           foundation for my M.S. direction: extending learned control from the bench toward
+           rough-terrain mobile missions and autonomous hazard inspection in mines.</p>
         <div class="metrics">
           <span class="metric">90% pick/place success</span>
           <span class="metric">95-episode curated dataset</span>
@@ -459,20 +459,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <span class="proj-tag">UNDERGROUND ROBOTICS · 2024</span>
         <h3>MeshRover Connect — Router-drop teleoperation for communication-denied mines</h3>
         <p>Underground mines lose all connectivity exactly when robots are needed most.
-           Our quadruped autonomously deploys mesh-network router nodes as it advances,
-           extending its own teleoperation range. Demonstrated 110 m of stable remote
-           operation from the portal of an active limestone mine, with 100% router-drop
-           connection success.</p>
+           Our quadruped autonomously drops Wi-Fi router nodes as it advances — triggered
+           when signal strength falls below −70 dBm — building a mesh network that extends
+           its own teleoperation range by ~40 m per router (up to 240 m with six). A thermal
+           camera flags people on detection. Validated for router-drop teleoperation in an
+           underground mine roughly 110 m deep.</p>
         <div class="metrics">
-          <span class="metric">110 m range underground</span>
-          <span class="metric">100% drop-connect success</span>
-          <span class="metric">15 min deployment</span>
+          <span class="metric">+40 m per router (up to 240 m)</span>
+          <span class="metric">~110 m-deep mine validated</span>
+          <span class="metric">−70 dBm auto-drop trigger</span>
         </div>
         <div class="proj-links">
           <a href="#publications">JKSMER 2025 (co-author)</a>
           <a href="#awards">Mine-Tech Festa 2024 — Grand Prize</a>
         </div>
-        <div class="stack">Unitree Go1 · mesh networking · Arduino router-drop module · thermal camera</div>
+        <div class="stack">Unitree Go1 · Wi-Fi mesh network · Arduino Uno router-drop module · thermal camera</div>
       </div>
     </article>
 
@@ -517,24 +518,26 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <!-- Project 5: tower crane -->
     <article class="proj reveal">
       <div class="proj-media is-figure">
-        <img src="crane-detection.jpg" alt="Three-stage YOLO detection on tower crane UAV imagery: bolt cap, missing bolt, turntable motor oil leak, and stopper packing classes">
+        <img src="crane-detection.jpg" alt="YOLO11l detection of tower-crane defect classes from UAV images: bolt cap present/missing, missing bolt, turntable motor oil leak, and stopper packing present/missing">
       </div>
       <div>
         <span class="proj-tag">UAV-AI INSPECTION · 2025 · MOLIT-FUNDED</span>
-        <h3>Drone + AI framework for exterior inspection of high-risk construction machinery</h3>
-        <p>The object-recognition expertise from GeoInpainter, redirected at a new hazard:
-           tower cranes. A three-stage parallel YOLO architecture (ROI selection → part
-           segmentation → defect detection) inspects crane exteriors from UAV imagery,
-           with per-component LLM reporting designed for cost-controlled field deployment.</p>
+        <h3>Drone + AI defect detection for tower cranes (high-risk machinery)</h3>
+        <p>Tower cranes are high-risk machines where a single component defect can cause a
+           fatal accident. I trained a YOLO11l model on UAV imagery to detect seven key
+           visual defect classes — mast bolts and bolt caps, turntable motor-box oil leaks,
+           and main-jib stopper packing — and built a 350-image dataset (229 real UAV images
+           + 121 synthetic) to cover rare defects. The object-recognition approach carries
+           over from GeoInpainter, redirected from terrain to safety inspection.</p>
         <div class="metrics">
-          <span class="metric">defect mAP 0.937</span>
-          <span class="metric">8-class ROI mAP 0.852</span>
-          <span class="metric">government R&amp;D grant</span>
+          <span class="metric">mAP@50 0.878 · @50–95 0.670</span>
+          <span class="metric">7 defect classes</span>
+          <span class="metric">229 real + 121 synthetic imgs</span>
         </div>
         <div class="proj-links">
-          <a href="#publications">Tunnel &amp; Underground Space 2025 (first author)</a>
+          <a href="#publications">Detection-model paper (first author, in press)</a>
         </div>
-        <div class="stack">YOLOv8/11 · CVAT · vision-language models · Jetson</div>
+        <div class="stack">YOLOv11l · CVAT · synthetic data · UAV · Jetson</div>
       </div>
     </article>
   </div>
@@ -562,11 +565,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
 
       <div class="pub">
+        <div class="pub-year">2026</div>
+        <div>
+          <h3>Development of a YOLO-based detection model for key visual defect elements of tower cranes using UAV images</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Taegyu Ahn, Yosoon Choi</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers (in press)</div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span><span class="badge">IN PRESS</span></div>
+          <div class="pub-links"><a href="#research">Project</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
         <div class="pub-year">2025</div>
         <div>
           <h3>Development of drone and AI based framework for exterior inspection and damage classification of tower cranes</h3>
-          <div class="authors"><span class="me">Hojun Yang</span>, Seungdo Kim, Yosoon Choi</div>
-          <div class="venue">Tunnel and Underground Space, Dec 2025</div>
+          <div class="authors"><span class="me">Hojun Yang</span>, Seongdo Kim, Yosoon Choi</div>
+          <div class="venue">Tunnel and Underground Space, 35(6), Dec 2025</div>
           <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span></div>
           <div class="pub-links"><a href="#research">Project</a></div>
         </div>
@@ -576,8 +590,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div class="pub-year">2025</div>
         <div>
           <h3>Review of UAV-AI-based automated visual inspection technologies and their applicability to high-risk construction machinery</h3>
-          <div class="authors"><span class="me">Hojun Yang</span>, Seungdo Kim, Yosoon Choi</div>
-          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Oct 2025</div>
+          <div class="authors"><span class="me">Hojun Yang</span>, Seongdo Kim, Yosoon Choi</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, 62(5), Oct 2025</div>
           <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span><span class="badge">REVIEW</span></div>
         </div>
       </div>
@@ -587,7 +601,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div>
           <h3>Development of augmented reality-based educational content for mine workers</h3>
           <div class="authors">Mingyeong Jang, <span class="me">Hojun Yang</span>, Yosoon Choi</div>
-          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Jun 2025</div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, 62(3), Jun 2025</div>
         </div>
       </div>
 
@@ -596,8 +610,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div>
           <h3>Router-drop-based robot teleoperation system for unconnected underground mines</h3>
           <div class="authors">Sanha Choi, <span class="me">Hojun Yang</span>, Yeanjae Kim, Yosoon Choi</div>
-          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, Jun 2025</div>
-          <div class="pub-links"><a href="#research">Project</a></div>
+          <div class="venue">Journal of the Korean Society of Mineral and Energy Resources Engineers, 62(3), Jun 2025</div>
+          <div class="pub-links"><a href="#research">Project</a> <a href="https://doi.org/10.32390/ksmer.2025.62.3.237" target="_blank" rel="noopener">DOI</a></div>
         </div>
       </div>
 
@@ -606,7 +620,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div>
           <h3>Analysis of wheel slip and path errors based on steering mechanisms of a small autonomous robot in underground rough environments</h3>
           <div class="authors"><span class="me">Hojun Yang</span>, Yosoon Choi</div>
-          <div class="venue">Tunnel and Underground Space, Jun 2025</div>
+          <div class="venue">Tunnel and Underground Space, 35(3), Jun 2025</div>
           <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span></div>
           <div class="pub-links"><a href="#research">Project</a></div>
         </div>
