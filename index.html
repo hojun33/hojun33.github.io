@@ -198,6 +198,8 @@ header.hero{
 .proj-media-stack video,.proj-media-stack img{width:100%;height:100%;object-fit:cover;display:block}
 .proj-media-stack figure.vid figcaption{top:0;bottom:auto;background:linear-gradient(rgba(11,27,51,.85),transparent);padding:6px 8px 16px}
 .proj-media-stack figure.fig img{object-fit:contain;background:#fff}
+.proj-media-stack figure.concept img{object-fit:cover;background:#000}
+.proj-media-stack figure.concept figcaption{top:8px;left:8px;right:auto;bottom:auto;background:rgba(11,27,51,.82);padding:3px 8px;border-radius:3px}
 .proj-media-stack .fig-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .proj-media-stack .fig-row figure{aspect-ratio:4/3}
 .proj-media-stack figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(11,27,51,.85));color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:16px 8px 6px;pointer-events:none}
@@ -435,7 +437,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <!-- Project 2: NRF mid-career project — NAMO mobile manipulation
          필요한 파일 (index.html과 같은 위치에 업로드):
          1) video-namo-full-mission.mp4 (+ -poster.jpg) : 인식→판단→도킹→제거→재측정→주행재개 전 과정, 60–90초 편집본
-         2) namo-system-hardware.jpg   : 라벨 붙인 로봇 사진 (Scout Mini·VLP-16·D435i/D455·MyCobot·MTi-630) -->
+         2) namo-concept-obstacle-classes.png : 제거/우회/제거불가 → UAV 정찰 개념도
+         3) namo-system-hardware.jpg : 하드웨어 구성도 + 통신 아키텍처 (흰 배경 도식 권장, 16:9) -->
     <article class="proj reveal">
       <div class="proj-media proj-media-stack">
         <figure class="vid">
@@ -443,9 +446,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
             <source src="video-namo-full-mission.mp4" type="video/mp4"></video>
           <figcaption>FULL NAMO MISSION · DARK DRIFT MOCK-UP</figcaption>
         </figure>
+        <figure class="fig concept">
+          <img src="namo-concept-obstacle-classes.png" alt="Concept: a mobile manipulator in a mine drift classifies obstacles on its global path as removable, bypassable, or non-removable; beyond a non-removable blockage, a UAV performs reconnaissance">
+          <figcaption>CONCEPT</figcaption>
+        </figure>
         <figure class="fig">
-          <img src="namo-system-hardware.jpg" alt="Mobile manipulator: AgileX Scout Mini with Velodyne VLP-16 LiDAR, Intel RealSense D435i and D455 cameras, Xsens IMU, and MyCobot Pro 600 arm">
-          <figcaption>SYSTEM · UGV + 6-DOF ARM</figcaption>
+          <img src="namo-system-hardware.jpg" alt="System hardware and communication architecture: AgileX Scout Mini (CAN-USB), Velodyne VLP-16 LiDAR (Ethernet), RealSense D435i and D455 (USB), Xsens MTi-630 IMU, and MyCobot Pro 600 arm over TCP/IP, integrated under a single ROS master">
+          <figcaption>HARDWARE · SINGLE ROS MASTER</figcaption>
         </figure>
       </div>
       <div>
@@ -471,9 +478,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </div>
         <div class="next-step">
           <strong>NEXT · FINAL YEAR</strong>
-          When an obstacle can't be cleared, the ground robot will hand the mission to a small
-          onboard drone (DJI RoboMaster TT) that scouts beyond the blockage — extending the
-          system from UGV-only to aerial–ground teaming.
+          Some blockages can be neither cleared nor bypassed. The next step is to let the ground
+          robot hand those cases to a small aerial robot that scouts beyond the obstacle —
+          moving from a single UGV toward aerial–ground teaming.
         </div>
         <div class="stack">AgileX Scout Mini · Velodyne VLP-16 · RealSense D435i/D455 · Xsens MTi-630 · MyCobot Pro 600 · YOLOv11L · ROS move_base / costmap</div>
       </div>
