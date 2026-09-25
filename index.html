@@ -193,6 +193,18 @@ header.hero{
 .proj-media-pair figure{position:relative;aspect-ratio:16/9;border:3px solid #fff;border-radius:6px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(11,27,51,.3)}
 .proj-media-pair img,.proj-media-pair video{width:100%;height:100%;object-fit:cover;display:block;background:#0B1B33}
 .proj-media-pair figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(11,27,51,.85));color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:16px 8px 6px}
+.proj-media-stack{aspect-ratio:auto;background:none;border:0;padding:0;display:grid;grid-template-rows:auto auto;gap:8px}
+.proj-media-stack figure{position:relative;aspect-ratio:16/9;border:3px solid #fff;border-radius:6px;overflow:hidden;box-shadow:0 10px 24px -14px rgba(11,27,51,.3);background:#0B1B33}
+.proj-media-stack video,.proj-media-stack img{width:100%;height:100%;object-fit:cover;display:block}
+.proj-media-stack figure.vid figcaption{top:0;bottom:auto;background:linear-gradient(rgba(11,27,51,.85),transparent);padding:6px 8px 16px}
+.proj-media-stack figure.fig img{object-fit:contain;background:#fff}
+.proj-media-stack .fig-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.proj-media-stack .fig-row figure{aspect-ratio:4/3}
+.proj-media-stack figcaption{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(11,27,51,.85));color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.05em;padding:16px 8px 6px;pointer-events:none}
+.pipeline{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:#F1F5FA;border:1px solid var(--line);border-radius:4px;padding:8px 10px;margin-bottom:14px;line-height:1.7}
+.pipeline b{color:var(--laser);font-weight:500}
+.next-step{border-left:3px solid var(--laser-bright);background:#F0F9FF;padding:10px 12px;margin:0 0 14px;border-radius:0 4px 4px 0;font-size:13.5px;color:var(--ink-soft)}
+.next-step strong{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--laser);display:block;margin-bottom:2px;font-weight:500}
 .proj-tag{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--laser);
   margin-bottom:8px;display:block;
@@ -420,7 +432,61 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
-    <!-- Project 2: Mobile manipulation / robot learning -->
+    <!-- Project 2: NRF mid-career project — NAMO mobile manipulation
+         필요한 파일 (index.html과 같은 위치에 업로드):
+         1) video-namo-full-mission.mp4 (+ -poster.jpg) : 인식→판단→도킹→제거→재측정→주행재개 전 과정, 60–90초 편집본
+         2) namo-system-hardware.jpg   : 라벨 붙인 로봇 사진 (Scout Mini·VLP-16·D435i/D455·MyCobot·MTi-630)
+         3) namo-height-before-after.jpg : 제거 전/후 Depth 높이 비교 (15.6 cm → 9.2 cm, 11 cm 기준선) -->
+    <article class="proj reveal">
+      <div class="proj-media proj-media-stack">
+        <figure class="vid">
+          <video controls preload="metadata" playsinline poster="video-namo-full-mission-poster.jpg">
+            <source src="video-namo-full-mission.mp4" type="video/mp4"></video>
+          <figcaption>FULL NAMO MISSION · DARK DRIFT MOCK-UP</figcaption>
+        </figure>
+        <div class="fig-row">
+          <figure class="fig">
+            <img src="namo-system-hardware.jpg" alt="Mobile manipulator: AgileX Scout Mini with Velodyne VLP-16 LiDAR, Intel RealSense D435i and D455 cameras, Xsens IMU, and MyCobot Pro 600 arm">
+            <figcaption>SYSTEM · UGV + 6-DOF ARM</figcaption>
+          </figure>
+          <figure class="fig">
+            <img src="namo-height-before-after.jpg" alt="Depth-based obstacle height before and after removal: 15.6 cm reduced to 9.2 cm, below the 11 cm clearance threshold">
+            <figcaption>HEIGHT 15.6 → 9.2 CM</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <span class="proj-tag">MOBILE MANIPULATION · 2025–2026 · NRF MID-CAREER PROJECT</span>
+        <h3>Clearing the way — autonomous obstacle removal for underground mine robots</h3>
+        <p>In narrow mine drifts a rock pile can end a robot's mission. As part of a four-year
+           National Research Foundation of Korea project on ROS modules for rough underground
+           terrain, I built a mobile manipulator that decides for itself whether to go around an
+           obstacle or clear it (Navigation Among Movable Obstacles, NAMO). RGB detection is fused
+           with depth and LiDAR to localize obstacles in the dark; a three-level decision layer
+           (LiDAR gap → path conflict → costmap inflation) switches to work mode only when bypass
+           is impossible; the robot then docks in three distance stages, removes the pile, and
+           re-measures its height in a closed loop until it clears the 11 cm chassis threshold.</p>
+        <div class="pipeline">
+          <b>perceive</b> YOLOv11L + depth/LiDAR fusion → <b>decide</b> gap · path · costmap →
+          <b>dock</b> far/mid/near → <b>act</b> arm profile → <b>verify</b> depth re-check → <b>go</b>
+        </div>
+        <div class="metrics">
+          <span class="metric">mAP@0.5 0.995 in low light</span>
+          <span class="metric">height 15.6 → 9.2 cm (≤ 11 cm)</span>
+          <span class="metric">1 m × 10 m dark drift mock-up</span>
+          <span class="metric">full loop, no operator</span>
+        </div>
+        <div class="next-step">
+          <strong>NEXT · FINAL YEAR</strong>
+          When an obstacle can't be cleared, the ground robot will hand the mission to a small
+          onboard drone (DJI RoboMaster TT) that scouts beyond the blockage — extending the
+          system from UGV-only to aerial–ground teaming.
+        </div>
+        <div class="stack">AgileX Scout Mini · Velodyne VLP-16 · RealSense D435i/D455 · Xsens MTi-630 · MyCobot Pro 600 · YOLOv11L · ROS move_base / costmap</div>
+      </div>
+    </article>
+
+    <!-- Project 3: Mobile manipulation / robot learning -->
     <article class="proj reveal">
       <div class="proj-media is-video">
         <video controls preload="metadata" playsinline poster="video-vla-pick-place-poster.jpg">
@@ -448,7 +514,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
-    <!-- Project 3: MeshRover -->
+    <!-- Project 4: MeshRover -->
     <article class="proj reveal">
       <div class="proj-media is-video">
         <video controls preload="metadata" playsinline poster="video-meshrover-field-test-poster.jpg">
@@ -477,7 +543,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
-    <!-- Project 4: rough terrain navigation -->
+    <!-- Project 5: rough terrain navigation -->
     <article class="proj reveal">
       <div class="proj-media proj-media-videos">
         <figure>
@@ -515,7 +581,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
-    <!-- Project 5: tower crane -->
+    <!-- Project 6: tower crane -->
     <article class="proj reveal">
       <div class="proj-media is-figure">
         <img src="crane-detection.jpg" alt="YOLO11l detection of tower-crane defect classes from UAV images: bolt cap present/missing, missing bolt, turntable motor oil leak, and stopper packing present/missing">
