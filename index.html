@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hojun Yang — Mining Robotics & Field Autonomy</title>
-<meta name="description" content="Hojun Yang — M.S. researcher in mining robotics: UAV-based spatial AI, GPS-denied underground navigation, and robot learning for autonomous mining systems." />
+<title>Hojun Yang · Field Robotics and Spatial AI</title>
+<meta name="description" content="Hojun Yang, M.S. researcher in field robotics and spatial AI: reliable 3D sensing of hazardous sites, trustworthy AI decisions, and field autonomy in mines and construction sites." />
 
 <!-- Google tag (gtag.js) — GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2S14SKT48"></script>
@@ -211,6 +211,11 @@ header.hero{
 .proj-media.wide-fig{aspect-ratio:auto;background:#fff;border:1px solid var(--line);padding:10px}
 .proj-media.wide-fig img{height:auto;object-fit:contain}
 .status{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:#0B1B33;background:#E0F2FE;border:1px solid #BAE6FD;border-radius:3px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.hero-status{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink-soft);display:flex;align-items:center;gap:8px}
+.hero-status .dot{width:7px;height:7px;border-radius:50%;background:var(--laser-bright);box-shadow:0 0 0 3px rgba(56,189,248,.22)}
+.results{list-style:none;margin:0 0 14px;padding:0}
+.results li{position:relative;padding:3px 0 3px 18px;font-size:14px;color:var(--ink)}
+.results li::before{content:"";position:absolute;left:0;top:13px;width:9px;height:2px;background:var(--laser-bright)}
 .next-step strong{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--laser);display:block;margin-bottom:2px;font-weight:500}
 .proj-tag{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--laser);
@@ -358,10 +363,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE, SOUTH KOREA</div>
       <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
       <p class="hero-sub">
-        I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
-        hazardous mining environments — from UAV-based terrain intelligence to GPS-denied
-        underground navigation and robot-learning-based manipulation. Validated where it
-        counts: inside real mines.
+        I'm <strong>Hojun Yang</strong>, an M.S. researcher in field robotics and spatial AI.
+        I study how UAVs and robots can build reliable representations of hazardous sites such
+        as mines and construction sites, decide which results to trust, and act on them. My
+        systems have been tested in operating open-pit and underground mines.
       </p>
       <div class="hero-meta">
         <div><b>1</b>SCI first-author paper<br>(Measurement, 2026)</div>
@@ -373,6 +378,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <a class="btn primary" href="#research">Explore research</a>
         <a class="btn" href="cv.pdf">Download CV (PDF)</a>
       </div>
+      <div class="hero-status"><span class="dot" aria-hidden="true"></span>Ph.D. applications submitted for Fall 2027</div>
     </div>
 
     <!-- ── HERO PHOTOS ──
@@ -400,8 +406,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="sec-head reveal">
       <div class="sec-eyebrow">Research</div>
       <h2>From aerial terrain models to underground autonomy</h2>
-      <p>One thread runs through my work: making mining environments measurable, navigable,
-         and workable by machines — so people don't have to take the risk.</p>
+      <p>One thread runs through my work. I want machines to make hazardous sites measurable,
+         navigable, and workable, so that people do not have to take the risk.</p>
     </div>
 
     <!-- Project 1: GeoInpainter -->
@@ -419,13 +425,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </figure>
       </div>
       <div>
-        <span class="proj-tag">UAV SPATIAL AI · 2024–2026 · FLAGSHIP</span>
-        <h3>GeoInpainter — Vehicle-free DEM generation for open-pit mines via UAV image inpainting</h3>
+        <span class="proj-tag">UAV SPATIAL AI · 2024-2026 · FLAGSHIP</span>
+        <h3>GeoInpainter: Vehicle-free DEM generation for open-pit mines via UAV image inpainting</h3>
         <p>Heavy equipment captured in UAV surveys distorts photogrammetric terrain models.
-           I built an automated pipeline — YOLOv8 detection → SAM masking → deep inpainting
-           (LaMa / MAT / DeepFillv2) → SfM reconstruction — that removes equipment before DEM
-           generation, and quantified the 2D-quality vs. 3D-geometry trade-off that
-           inpainting introduces into tie-point matching.</p>
+           I built an automated pipeline that removes equipment before DEM generation (YOLOv8
+           detection → SAM masking → deep inpainting with LaMa, MAT, or DeepFillv2 → SfM
+           reconstruction). I also quantified the trade-off between 2D image quality and 3D
+           geometry that inpainting introduces into tie-point matching.</p>
         <div class="metrics">
           <span class="metric">MAE 1.276→0.111 m (loader)</span>
           <span class="metric">~10× faster than manual editing</span>
@@ -433,7 +439,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </div>
         <div class="proj-links">
           <a href="#publications">Measurement 2026 (first author)</a>
-          <a href="#awards">Mine-Tech Festa 2025 — Gold Prize</a>
+          <a href="#awards">Mine-Tech Festa 2025 · Gold Prize</a>
         </div>
         <div class="stack">YOLOv8 · SAM · LaMa · SfM · DJI Mini 4 Pro · Pix4D</div>
       </div>
@@ -454,13 +460,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
            the visible surrounding terrain. It runs as a preprocessing step before SfM and needs
            no prior 3D model of the site. I designed and implemented the method, evaluated the
            Pix4D reconstructions, ran the statistical analysis, and wrote the manuscript.</p>
-        <div class="metrics">
-          <span class="metric">median elevation MAE 0.068 m on 5 real machines</span>
-          <span class="metric">per-view LaMa 0.264 m · MVInpainter 0.230 m</span>
-          <span class="metric">lowest error of the 3 methods on 95 synthetic occlusions</span>
-        </div>
+        <ul class="results">
+          <li>The median elevation error over five machines was 0.068 m, compared with 0.264 m for per-view inpainting and 0.230 m for MVInpainter.</li>
+          <li>The phantom volume was reduced from 304.9 m³ to 14.8 m³.</li>
+        </ul>
         <div class="proj-links">
-          <a href="#publications">In preparation for <i>The Photogrammetric Record</i> (first author)</a>
+          <a href="#publications">Manuscript in preparation (first author)</a>
           <a href="#awards">KAGIS Fall 2026 · Excellent Presentation Award</a>
           <a href="#talks">KSMER Spring 2026 · Oral</a>
         </div>
@@ -481,7 +486,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <figcaption>FULL NAMO MISSION · DARK DRIFT MOCK-UP</figcaption>
         </figure>
         <figure class="fig concept">
-          <img src="namo-concept-obstacle-classes.jpg" alt="Concept: a mobile manipulator in a mine drift classifies obstacles on its global path as removable, bypassable, or non-removable; beyond a non-removable blockage, a UAV performs reconnaissance">
+          <img src="namo-concept-obstacle-classes.jpg" alt="Concept: a mobile manipulator in a mine drift classifies obstacles on its global path as removable, bypassable, or non-removable. Beyond a non-removable blockage, a UAV performs reconnaissance">
           <figcaption>CONCEPT</figcaption>
         </figure>
         <figure class="fig">
@@ -490,16 +495,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </figure>
       </div>
       <div>
-        <span class="proj-tag">MOBILE MANIPULATION · 2025–2026 · NRF MID-CAREER PROJECT</span>
-        <h3>Clearing the way — autonomous obstacle removal for underground mine robots</h3>
+        <span class="proj-tag">MOBILE MANIPULATION · 2025-2026 · NRF MID-CAREER PROJECT</span>
+        <h3>Clearing the way: autonomous obstacle removal for underground mine robots</h3>
         <p>In narrow mine drifts a rock pile can end a robot's mission. As part of a four-year
            National Research Foundation of Korea project on ROS modules for rough underground
            terrain, I built a mobile manipulator that decides for itself whether to go around an
-           obstacle or clear it (Navigation Among Movable Obstacles, NAMO). RGB detection is fused
-           with depth and LiDAR to localize obstacles in the dark; a three-level decision layer
-           (LiDAR gap → path conflict → costmap inflation) switches to work mode only when bypass
-           is impossible; the robot then docks in three distance stages, removes the pile, and
-           re-measures its height in a closed loop until it clears the 11 cm chassis threshold.</p>
+           obstacle or clear it (Navigation Among Movable Obstacles, NAMO). The robot fuses
+           RGB detection with depth and LiDAR to localize obstacles in the dark. A three-level
+           decision layer (LiDAR gap → path conflict → costmap inflation) switches it to work mode
+           only when a bypass is impossible. The robot then docks in three distance stages, removes
+           the pile, and re-measures its height in a closed loop until the pile is below the 11 cm
+           chassis threshold.</p>
         <div class="pipeline">
           <b>perceive</b> YOLOv11L + depth/LiDAR fusion → <b>decide</b> gap · path · costmap →
           <b>dock</b> far/mid/near → <b>act</b> arm profile → <b>verify</b> depth re-check → <b>go</b>
@@ -513,7 +519,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div class="next-step">
           <strong>NOW IN PROGRESS</strong>
           Some blockages can be neither cleared nor bypassed. In those cases the ground robot now
-          hands the job to a drone. <a href="#ugv-drone">See UGV–drone teaming below.</a>
+          hands the job to a drone. <a href="#ugv-drone">See UGV-drone teaming below.</a>
         </div>
         <div class="stack">AgileX Scout Mini · Velodyne VLP-16 · RealSense D435i/D455 · Xsens MTi-630 · MyCobot Pro 600 · YOLOv11L · ROS move_base / costmap</div>
       </div>
@@ -534,8 +540,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </figure>
       </div>
       <div>
-        <span class="proj-tag">AERIAL–GROUND TEAMING · 2026 · <span class="status">IN PROGRESS</span></span>
-        <h3>UGV–drone teaming for GPS-denied underground terrain</h3>
+        <span class="proj-tag">AERIAL-GROUND TEAMING · 2026 · <span class="status">IN PROGRESS</span></span>
+        <h3>UGV-drone teaming for GPS-denied underground terrain</h3>
         <p>In an underground mine there is no GPS, and some areas are simply out of reach for a
            ground robot. I am developing a ROS extension module that lets an autonomous UGV
            decide for itself when it can no longer drive forward, and then launch the drone it
@@ -563,21 +569,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </video>
       </div>
       <div>
-        <span class="proj-tag">ROBOT LEARNING · 2025–PRESENT</span>
+        <span class="proj-tag">ROBOT LEARNING · 2025-PRESENT</span>
         <h3>Vision-language-action robot learning for autonomous manipulation</h3>
         <p>I trained a 6-DoF collaborative arm (dual RGB-D cameras) with imitation learning
            to perform autonomous pick-and-place, then audited the demonstration dataset with
-           forward-kinematics-based outlier removal to raise success to 90% — confirming that
-           vision-language-action robot learning transfers to my own hardware. This is the
-           foundation for my M.S. direction: extending learned control from the bench toward
-           rough-terrain mobile missions and autonomous hazard inspection in mines.</p>
+           forward-kinematics-based outlier removal to raise success to 90%. This result confirmed
+           that vision-language-action robot learning transfers to my own hardware. It is also the
+           foundation of my current direction, which extends learned control from the bench toward
+           rough-terrain mobile missions and autonomous hazard inspection.</p>
         <div class="metrics">
           <span class="metric">90% pick/place success</span>
           <span class="metric">95-episode curated dataset</span>
           <span class="metric">6-DoF arm + dual RGB-D</span>
         </div>
         <div class="proj-links">
-          <a href="#talks">KSMER 2026 Spring — Poster</a>
+          <a href="#talks">KSMER 2026 Spring · Poster</a>
         </div>
         <div class="stack">SmolVLA · LeRobot · MyCobot Pro 600 · ROS · RealSense D435i/D455</div>
       </div>
@@ -592,13 +598,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div>
         <span class="proj-tag">UNDERGROUND ROBOTICS · 2024</span>
-        <h3>MeshRover Connect — Router-drop teleoperation for communication-denied mines</h3>
+        <h3>MeshRover Connect: Router-drop teleoperation for communication-denied mines</h3>
         <p>Underground mines lose all connectivity exactly when robots are needed most.
-           Our quadruped autonomously drops Wi-Fi router nodes as it advances — triggered
-           when signal strength falls below −70 dBm — building a mesh network that extends
-           its own teleoperation range by ~40 m per router (up to 240 m with six). A thermal
-           camera flags people on detection. Validated for router-drop teleoperation in an
-           underground mine roughly 110 m deep.</p>
+           In this project, a quadruped robot autonomously drops Wi-Fi router nodes as it
+           advances whenever the signal strength falls below −70 dBm. The nodes form a mesh network
+           that extends its teleoperation range by about 40 m per router (up to 240 m with six).
+           A thermal camera flags people on detection. The team validated router-drop teleoperation
+           in an underground mine roughly 110 m deep. I contributed to this project, led by my
+           advisor, by assembling the system, discussing the experiment design, and running the
+           field experiments.</p>
         <div class="metrics">
           <span class="metric">+40 m per router (up to 240 m)</span>
           <span class="metric">~110 m-deep mine validated</span>
@@ -606,7 +614,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         </div>
         <div class="proj-links">
           <a href="#publications">JKSMER 2025 (co-author)</a>
-          <a href="#awards">Mine-Tech Festa 2024 — Grand Prize</a>
+          <a href="#awards">Mine-Tech Festa 2024 · Grand Prize</a>
         </div>
         <div class="stack">Unitree Go1 · Wi-Fi mesh network · Arduino Uno router-drop module · thermal camera</div>
       </div>
@@ -634,13 +642,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div>
         <span class="proj-tag">FIELD NAVIGATION · 2024 · WHERE IT STARTED</span>
         <h3>Wheel slip &amp; path error across steering mechanisms in underground rough terrain</h3>
-        <p>My first research project — and the reason I do field robotics. Compared
-           Ackermann, differential, and tracked steering on wet, potholed mine floors using
+        <p>This was my first research project, and it is the reason I do field robotics.
+           I compared Ackermann, differential, and tracked steering on wet, potholed mine floors using
            a laser-grid ground truth, in both field experiments and slip-injected simulation.
-           Differential steering recovered paths best (RMSE 0.2311 m); the gap between
-           simulation and reality taught me to never trust a robot that hasn't left the lab.</p>
+           Differential steering recovered paths best (RMSE 0.2311 m). The gap between
+           simulation and reality taught me never to trust a robot that has not left the lab.</p>
         <div class="metrics">
-          <span class="metric">RMSE 0.231–0.312 m by mechanism</span>
+          <span class="metric">RMSE 0.231 to 0.312 m by mechanism</span>
           <span class="metric">field + simulation validation</span>
         </div>
         <div class="proj-links">
@@ -656,18 +664,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <img src="crane-detection.jpg" alt="YOLO11l detection of tower-crane defect classes from UAV images: bolt cap present/missing, missing bolt, turntable motor oil leak, and stopper packing present/missing">
       </div>
       <div>
-        <span class="proj-tag">UAV-AI INSPECTION · 2025 · MOLIT-FUNDED</span>
+        <span class="proj-tag">UAV-AI INSPECTION · 2025-2026 · MOLIT-FUNDED</span>
         <h3>Drone + AI defect detection for tower cranes (high-risk machinery)</h3>
         <p>Tower cranes are high-risk machines where a single component defect can cause a
            fatal accident. I trained a YOLO11l model on UAV imagery to detect seven key
-           visual defect classes — mast bolts and bolt caps, turntable motor-box oil leaks,
-           and main-jib stopper packing — and built a 350-image dataset (229 real UAV images
-           + 121 synthetic) to cover rare defects. The object-recognition approach carries
+           visual defect classes, including mast bolts and bolt caps, turntable motor-box oil
+           leaks, and main-jib stopper packing. I built a 350-image dataset (229 real UAV images
+           and 121 synthetic images) to cover rare defects. I then extended the work to eight
+           inspection items, which passed independent acceptance tests with a mean mAP@50 above
+           0.92 in two consecutive years. I also designed a confidence-based decision policy that
+           sends uncertain detections to a vision-language model or to human review. The object-recognition approach carries
            over from GeoInpainter, redirected from terrain to safety inspection.</p>
         <div class="metrics">
-          <span class="metric">mAP@50 0.878 · @50–95 0.670</span>
+          <span class="metric">mAP@50 0.878 · @50-95 0.670</span>
           <span class="metric">7 defect classes</span>
           <span class="metric">229 real + 121 synthetic imgs</span>
+          <span class="metric">8 items · mean mAP@50 &gt; 0.92 · 2 years</span>
+          <span class="metric">confidence-based VLM / human review</span>
         </div>
         <div class="proj-links">
           <a href="#publications">Detection-model paper (first author)</a>
@@ -684,7 +697,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="sec-head reveal">
       <div class="sec-eyebrow">Publications</div>
       <h2>Journal articles</h2>
-      <p>Underline marks me; first-author papers tagged. Full texts available on request.</p>
+      <p>My name is underlined, and first-author papers are tagged. Full texts are available on request.</p>
     </div>
 
     <div class="reveal">
@@ -798,7 +811,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="row">
         <div class="when">2026 SPRING</div>
         <div class="what"><b>Scaled collaborative-manipulator platform for robot-learning-based autonomous mining equipment</b>
-          <span>KSMER Spring Conference — SmolVLA pick &amp; place </span></div>
+          <span>KSMER Spring Conference · SmolVLA pick &amp; place </span></div>
         <div class="kind">POSTER</div>
       </div>
       <div class="row">
@@ -822,7 +835,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="row">
         <div class="when">2024 FALL</div>
         <div class="what"><b>Wheel slip and path error analysis of steering mechanisms in underground rough terrain</b>
-          <span>KSMER Fall Joint Conference — first conference talk, as an undergraduate</span></div>
+          <span>KSMER Fall Joint Conference · my first conference talk, given as an undergraduate</span></div>
         <div class="kind">ORAL</div>
       </div>
     </div>
@@ -870,49 +883,49 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div class="row">
         <div class="when">2025</div>
-        <div class="what"><b>Best Paper Presentation Award — KSMER Fall Conference</b>
+        <div class="what"><b>Best Paper Presentation Award, KSMER Fall Conference</b>
           <span>GeoInpainter: vehicle-free DEM automation · Korean Society of Mineral and Energy Resources Engineers</span></div>
         <div class="kind gold">★ BEST PAPER</div>
       </div>
       <div class="row">
         <div class="when">2025</div>
-        <div class="what"><b>Gold Prize — Mine-Tech Festa</b>
+        <div class="what"><b>Gold Prize, Mine-Tech Festa</b>
           <span>GeoInpainter: vehicle-free DEM automation · KOMIR</span></div>
         <div class="kind gold">★ GOLD PRIZE</div>
       </div>
       <div class="row">
         <div class="when">2025</div>
-        <div class="what"><b>President's Award — Korean Society of Mineral and Energy Resources Engineers</b>
+        <div class="what"><b>President's Award, Korean Society of Mineral and Energy Resources Engineers</b>
           <span>Selected as a promising young researcher in resources engineering</span></div>
         <div class="kind">HONOR</div>
       </div>
       <div class="row">
         <div class="when">2025</div>
-        <div class="what"><b>Commendation — Korean Association of Geographic Information Studies</b>
+        <div class="what"><b>Commendation, Korean Association of Geographic Information Studies</b>
           <span>Selected as a promising talent in geospatial information</span></div>
         <div class="kind">HONOR</div>
       </div>
       <div class="row">
         <div class="when">2024</div>
-        <div class="what"><b>Grand Prize — Mine-Tech Festa</b>
+        <div class="what"><b>Grand Prize, Mine-Tech Festa</b>
           <span>MeshRover Connect: router-drop underground teleoperation · KOMIR</span></div>
         <div class="kind gold">★ GRAND PRIZE</div>
       </div>
       <div class="row">
         <div class="when">2024</div>
-        <div class="what"><b>Excellence Award — Busan Future Scientist Award</b>
+        <div class="what"><b>Excellence Award, Busan Future Scientist Award</b>
           <span>Busan Science &amp; Technology Council</span></div>
         <div class="kind">EXCELLENCE</div>
       </div>
       <div class="row">
         <div class="when">2023</div>
-        <div class="what"><b>Excellence Award — Geoscience Data Utilization Competition</b>
+        <div class="what"><b>Excellence Award, Geoscience Data Utilization Competition</b>
           <span>Korea Institute of Geoscience and Mineral Resources</span></div>
         <div class="kind">EXCELLENCE</div>
       </div>
       <div class="row">
         <div class="when">2023</div>
-        <div class="what"><b>Excellence Award — Mine-Tech Festa</b>
+        <div class="what"><b>Excellence Award, Mine-Tech Festa</b>
           <span>ARtist: AR-based safety training content for mine workers · KOMIR</span></div>
         <div class="kind">EXCELLENCE</div>
       </div>
@@ -965,7 +978,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-eyebrow">About</div>
-      <h2>Toward a Ph.D. in field robotics for mining</h2>
+      <h2>Toward a Ph.D. in field robotics and spatial AI</h2>
     </div>
     <div class="about-grid reveal">
       <div class="portrait has-img">
@@ -973,15 +986,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
       <div>
         <p>I'm an M.S. student at the SMART-X Lab, Department of Energy and Mineral Resources Engineering, Sejong University (advisor: Prof. Yosoon Choi), working
-           on robotics and automation for mining environments. I started as an undergraduate driving small robots through a wet
-           limestone mine, and have since built systems spanning UAV photogrammetry, deep
-           learning-based perception, GPS-denied SLAM, and robot learning for manipulation.</p>
-        <p>I'm preparing to apply for Ph.D. programs (Fall 2027) where I can pursue:</p>
+           on field robotics and spatial AI for hazardous sites. I started as an undergraduate driving
+           small robots through a wet limestone mine, and I have since built systems spanning UAV
+           photogrammetry, deep learning-based perception and inspection, GPS-denied SLAM, and robot
+           learning for manipulation.</p>
+        <p>I have applied to Ph.D. programs for Fall 2027, where I hope to pursue:</p>
         <ul class="interest-list">
-          <li>Autonomous exploration and inspection in GPS-denied underground environments</li>
-          <li>Mobile manipulation and robot learning for mining-equipment automation</li>
-          <li>Planetary surface robotics and ISRU — mining beyond Earth</li>
+          <li>Reliable 3D sensing and geospatial monitoring of field sites</li>
+          <li>Trustworthy decision-making under uncertainty, including human-AI collaboration in inspection</li>
+          <li>Field autonomy and manipulation, including multi-robot exploration in GPS-denied environments</li>
         </ul>
+        <p style="margin-top:14px">Long-term interest: robotics for planetary exploration and in-situ resource utilization.</p>
         <p style="margin-top:18px">If our research interests overlap, I'd love to talk:
            <a href="mailto:hojun@sju.ac.kr">hojun@sju.ac.kr</a></p>
       </div>
