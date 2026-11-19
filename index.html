@@ -206,6 +206,11 @@ header.hero{
 .pipeline{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:#F1F5FA;border:1px solid var(--line);border-radius:4px;padding:8px 10px;margin-bottom:14px;line-height:1.7}
 .pipeline b{color:var(--laser);font-weight:500}
 .next-step{border-left:3px solid var(--laser-bright);background:#F0F9FF;padding:10px 12px;margin:0 0 14px;border-radius:0 4px 4px 0;font-size:13.5px;color:var(--ink-soft)}
+/* full-width card: wide figure on top, text below (used for MIRAP pipeline) */
+.proj.wide{grid-template-columns:1fr;gap:24px}
+.proj-media.wide-fig{aspect-ratio:auto;background:#fff;border:1px solid var(--line);padding:10px}
+.proj-media.wide-fig img{height:auto;object-fit:contain}
+.status{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:#0B1B33;background:#E0F2FE;border:1px solid #BAE6FD;border-radius:3px;padding:2px 7px;margin-left:6px;vertical-align:2px}
 .next-step strong{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--laser);display:block;margin-bottom:2px;font-weight:500}
 .proj-tag{
   font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--laser);
@@ -353,7 +358,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="hero-eyebrow">FIELD SITE · DANYANG LIMESTONE MINE, SOUTH KOREA</div>
       <h1>Robots for the places <span class="accent">miners</span> shouldn't have to go.</h1>
       <p class="hero-sub">
-        I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous s for
+        I'm <strong>Hojun Yang</strong>, an M.S. researcher building autonomous systems for
         hazardous mining environments — from UAV-based terrain intelligence to GPS-denied
         underground navigation and robot-learning-based manipulation. Validated where it
         counts: inside real mines.
@@ -382,9 +387,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <img src="profile.jpg" alt="Hojun Yang portrait">
       </div>
       <div class="frame frame-talk has-img">
-        <img src="fieldwork-openpit-mine-1.jpg" alt="Hojun Yang during a field survey at an open-pit limestone mine">
+        <img src="field-underground-ugv-operator.jpg" alt="Hojun Yang operating a LiDAR-equipped ground robot during a field test inside an underground mine">
       </div>
-      <div class="frame-caption">OPEN-PIT FIELD SURVEY · LIMESTONE MINE</div>
+      <div class="frame-caption">UNDERGROUND MINE · UGV FIELD TEST</div>
     </div>
   </div>
 </header>
@@ -434,10 +439,39 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </article>
 
+    <!-- Project 1b: MIRAP (GeoInpainter follow-up) · 파일: mirap-pipeline.jpg -->
+    <article class="proj wide reveal" id="mirap">
+      <div class="proj-media wide-fig">
+        <a href="mirap-pipeline.jpg" target="_blank" rel="noopener" title="Open full-size figure"><img src="mirap-pipeline.jpg" alt="MIRAP pipeline: equipment masks and surrounding-terrain rings, observation grouping across views, representative inpainting propagated to other views through local homographies, then photogrammetric reconstruction to a DSM and orthomosaic"></a>
+      </div>
+      <div>
+        <span class="proj-tag">UAV SPATIAL AI · 2026 · FOLLOW-UP TO GEOINPAINTER</span>
+        <h3>MIRAP: multi-view inpainting via representative-anchored propagation</h3>
+        <p>Heavy equipment in UAV images still distorts the DSM of an open-pit mine, and the
+           same patch of ground is hidden in many overlapping photos. MIRAP groups the
+           observations that hide the same ground, restores one representative observation, and
+           propagates that result to the other views through local homographies estimated from
+           the visible surrounding terrain. It runs as a preprocessing step before SfM and needs
+           no prior 3D model of the site. I designed and implemented the method, evaluated the
+           Pix4D reconstructions, ran the statistical analysis, and wrote the manuscript.</p>
+        <div class="metrics">
+          <span class="metric">median elevation MAE 0.068 m on 5 real machines</span>
+          <span class="metric">per-view LaMa 0.264 m · MVInpainter 0.230 m</span>
+          <span class="metric">lowest error of the 3 methods on 95 synthetic occlusions</span>
+        </div>
+        <div class="proj-links">
+          <a href="#publications">In preparation for <i>The Photogrammetric Record</i> (first author)</a>
+          <a href="#awards">KAGIS Fall 2026 · Excellent Presentation Award</a>
+          <a href="#talks">KSMER Spring 2026 · Oral</a>
+        </div>
+        <div class="stack">LaMa · SIFT · MAGSAC++ · local homography · Pix4D SfM/MVS · DJI Mini 4 Pro</div>
+      </div>
+    </article>
+
     <!-- Project 2: NRF mid-career project — NAMO mobile manipulation
          필요한 파일 (index.html과 같은 위치에 업로드):
          1) video-namo-full-mission.mp4 (+ -poster.jpg) : 인식→판단→도킹→제거→재측정→주행재개 전 과정, 60–90초 편집본
-         2) namo-concept-obstacle-classes.png : 제거/우회/제거불가 → UAV 정찰 개념도
+         2) namo-concept-obstacle-classes.jpg : 제거/우회/제거불가 → UAV 정찰 개념도
          3) namo--hardware.jpg : 하드웨어 구성도 + 통신 아키텍처 (흰 배경 도식 권장, 16:9) -->
     <article class="proj reveal">
       <div class="proj-media proj-media-stack">
@@ -447,7 +481,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <figcaption>FULL NAMO MISSION · DARK DRIFT MOCK-UP</figcaption>
         </figure>
         <figure class="fig concept">
-          <img src="namo-concept-obstacle-classes.png" alt="Concept: a mobile manipulator in a mine drift classifies obstacles on its global path as removable, bypassable, or non-removable; beyond a non-removable blockage, a UAV performs reconnaissance">
+          <img src="namo-concept-obstacle-classes.jpg" alt="Concept: a mobile manipulator in a mine drift classifies obstacles on its global path as removable, bypassable, or non-removable; beyond a non-removable blockage, a UAV performs reconnaissance">
           <figcaption>CONCEPT</figcaption>
         </figure>
         <figure class="fig">
@@ -477,12 +511,47 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
           <span class="metric">full loop, no operator</span>
         </div>
         <div class="next-step">
-          <strong>NEXT · FINAL YEAR</strong>
-          Some blockages can be neither cleared nor bypassed. The next step is to let the ground
-          robot hand those cases to a small aerial robot that scouts beyond the obstacle —
-          moving from a single UGV toward aerial–ground teaming.
+          <strong>NOW IN PROGRESS</strong>
+          Some blockages can be neither cleared nor bypassed. In those cases the ground robot now
+          hands the job to a drone. <a href="#ugv-drone">See UGV–drone teaming below.</a>
         </div>
         <div class="stack">AgileX Scout Mini · Velodyne VLP-16 · RealSense D435i/D455 · Xsens MTi-630 · MyCobot Pro 600 · YOLOv11L · ROS move_base / costmap</div>
+      </div>
+    </article>
+
+    <!-- Project 2b: UGV–drone teaming (진행 중)
+         파일: research-ugv-drone-underground.jpg, research-ugv-drone-portal.jpg
+         드론 출동 영상이 생기면 첫 figure를 <video>로 교체 -->
+    <article class="proj reveal" id="ugv-drone">
+      <div class="proj-media proj-media-pair">
+        <figure>
+          <img src="research-ugv-drone-underground.jpg" alt="Hojun Yang watching a LiDAR-equipped ground robot drive down a dark underground mine drift">
+          <figcaption>UNDERGROUND DRIFT · FIELD TEST</figcaption>
+        </figure>
+        <figure>
+          <img style="object-position:50% 78%" src="research-ugv-drone-portal.jpg" alt="Hojun Yang operating the ground robot at the portal of an underground mine">
+          <figcaption>MINE PORTAL · FIELD TEST</figcaption>
+        </figure>
+      </div>
+      <div>
+        <span class="proj-tag">AERIAL–GROUND TEAMING · 2026 · <span class="status">IN PROGRESS</span></span>
+        <h3>UGV–drone teaming for GPS-denied underground terrain</h3>
+        <p>In an underground mine there is no GPS, and some areas are simply out of reach for a
+           ground robot. I am developing a ROS extension module that lets an autonomous UGV
+           decide for itself when it can no longer drive forward, and then launch the drone it
+           carries to scout the area it cannot reach. This continues the obstacle-removal work
+           above. When a blockage can be neither cleared nor bypassed, the robot sends the
+           mission into the air instead of ending it.</p>
+        <div class="pipeline">
+          <b>drive</b> autonomous navigation → <b>judge</b> impassable? → <b>launch</b> onboard drone →
+          <b>scout</b> the unreachable area
+        </div>
+        <div class="metrics">
+          <span class="metric">GPS-denied underground terrain</span>
+          <span class="metric">self-assessed traversability</span>
+          <span class="metric">onboard drone deployment</span>
+        </div>
+        <div class="stack">ROS · 3D LiDAR · UGV · onboard drone</div>
       </div>
     </article>
 
@@ -622,6 +691,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="pub">
         <div class="pub-year">2026</div>
         <div>
+          <h3>Representative-anchored multi-view inpainting for consistent terrain reconstruction from unmanned aerial vehicle images</h3>
+          <div class="authors"><span class="me">Hojun Yang</span>, Yosoon Choi</div>
+          <div class="venue">Manuscript in preparation for submission to <i>The Photogrammetric Record</i></div>
+          <div class="pub-badges"><span class="badge first">FIRST AUTHOR</span><span class="badge">IN PREPARATION</span></div>
+          <div class="pub-links"><a href="#mirap">Project</a></div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-year">2026</div>
+        <div>
           <h3>Generation of vehicle-free digital elevation models in open-pit mines using UAV image inpainting</h3>
           <div class="authors"><span class="me">Hojun Yang</span>, Yosoon Choi</div>
           <div class="venue">Measurement (SCIE)</div>
@@ -704,6 +784,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <div class="rows reveal">
       <div class="row">
+        <div class="when">2026 FALL</div>
+        <div class="what"><b>Reducing DEM distortion from heavy equipment in open-pit mines using UAV image inpainting</b>
+          <span>KAGIS Fall Conference (Korean Association of Geographic Information Studies) · Excellent Presentation Award</span></div>
+        <div class="kind gold">★ ORAL</div>
+      </div>
+      <div class="row">
+        <div class="when">2026 SPRING</div>
+        <div class="what"><b>MIRAP: Reducing DEM distortion from heavy equipment in open-pit mines using UAV image inpainting</b>
+          <span>KSMER Spring Conference</span></div>
+        <div class="kind">ORAL</div>
+      </div>
+      <div class="row">
         <div class="when">2026 SPRING</div>
         <div class="what"><b>Scaled collaborative-manipulator platform for robot-learning-based autonomous mining equipment</b>
           <span>KSMER Spring Conference — SmolVLA pick &amp; place </span></div>
@@ -737,6 +829,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
     <div class="gallery reveal" style="grid-template-columns:repeat(3,1fr)">
       <figure class="has-img">
+        <img src="presentation-kagis-fall-2026-oral.jpg" alt="Oral presentation of the MIRAP framework at the KAGIS Fall Conference 2026">
+        <figcaption>KAGIS FALL 2026 · ORAL · AWARD</figcaption>
+      </figure>
+      <figure class="has-img">
+        <img src="presentation-ksmer-spring-2026-oral.jpg" alt="Oral presentation on MIRAP results at the KSMER Spring Conference 2026">
+        <figcaption>KSMER SPRING 2026 · ORAL</figcaption>
+      </figure>
+      <figure class="has-img">
         <img src="presentation-sme-poster.jpg" alt="Presenting a poster at the SME Annual Conference, USA">
         <figcaption>SME ANNUAL · USA · POSTER</figcaption>
       </figure>
@@ -762,6 +862,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
          (Korea Mine Rehabilitation &amp; Mineral Resources Corp.).</p>
     </div>
     <div class="rows reveal">
+      <div class="row">
+        <div class="when">2026</div>
+        <div class="what"><b>Excellent Presentation Award, KAGIS Fall Conference</b>
+          <span>MIRAP: reducing heavy-equipment DEM distortion with UAV image inpainting · Korean Association of Geographic Information Studies</span></div>
+        <div class="kind gold">★ PRESENTATION AWARD</div>
+      </div>
       <div class="row">
         <div class="when">2025</div>
         <div class="what"><b>Best Paper Presentation Award — KSMER Fall Conference</b>
@@ -814,6 +920,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
     <!-- ── AWARD GALLERY ── 시상식/상장 사진. 다른 사진으로 바꾸려면 src만 교체 -->
     <div class="gallery reveal">
+      <figure class="has-img">
+        <img src="award-kagis-excellent-presentation-2026.jpg" alt="KAGIS Fall Conference 2026 Excellent Presentation Award certificate">
+        <figcaption>KAGIS FALL 2026 · PRESENTATION AWARD</figcaption>
+      </figure>
       <figure class="has-img">
         <img src="award-best-paper-ksmer-fall-2025-ceremony.jpg" alt="KSMER Fall 2025 Best Paper Presentation Award ceremony">
         <figcaption>KSMER FALL 2025 · BEST PAPER</figcaption>
